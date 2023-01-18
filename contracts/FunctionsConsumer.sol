@@ -6,7 +6,7 @@ import "./dev/functions/FunctionsClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 
 /**
- * @title Functions Copns contract
+ * @title Functions Consumer contract
  * @notice This contract is a demonstration of using Functions.
  * @notice NOT FOR PRODUCTION USE
  */
@@ -14,10 +14,10 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   using Functions for Functions.Request;
 
   bytes32 public latestRequestId;
-  bytes public latestResponse;
+  string public latestResponse;
   bytes public latestError;
 
-  event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
+  event OCRResponse(bytes32 indexed requestId, string result, bytes err);
 
   /**
    * @notice Executes once when a contract is created to initialize state variables
@@ -47,6 +47,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
 
     bytes32 assignedReqID = sendRequest(req, subscriptionId, gasLimit, tx.gasprice);
     latestRequestId = assignedReqID;
+
     return assignedReqID;
   }
 
@@ -63,9 +64,10 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
     bytes memory response,
     bytes memory err
   ) internal override {
-    // revert('test');
-    latestResponse = response;
+    string memory responseString = string(response);
+    latestResponse = responseString;
     latestError = err;
-    emit OCRResponse(requestId, response, err);
+    emit OCRResponse(requestId, responseString, err);
   }
+
 }
