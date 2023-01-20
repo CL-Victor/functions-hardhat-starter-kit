@@ -14,7 +14,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   using Functions for Functions.Request;
 
   bytes32 public latestRequestId;
-  bytes public latestResponse;
+  string public latestResponse;
   bytes public latestError;
 
   event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
@@ -64,7 +64,7 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
     bytes memory err
   ) internal override {
     // revert('test');
-    latestResponse = response;
+    latestResponse = string(response);
     latestError = err;
     emit OCRResponse(requestId, response, err);
   }
