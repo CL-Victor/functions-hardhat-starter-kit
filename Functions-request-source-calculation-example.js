@@ -1,4 +1,4 @@
-// This example shows how to share Fortine leaderboard top 3 for a specific season specifide in the contract args
+// This example shows how to share Fortine leaderboard top 3 for a specific season you can chose in the contract args
 // This leaderboard could trigger on-chain rewards transfers to the winners in the form of NFTs (unique tradeable in-game skins) or cryptocurrency payments
 
 // Arguments can be provided when a request is initated on-chain and used in the request source code as shown below
